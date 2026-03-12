@@ -1,0 +1,123 @@
+[gd_scene load_steps=8 format=3 uid="uid://main"]
+
+[ext_resource type="Script" path="res://scripts/Main.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/Player.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://scenes/EnemyBasic.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://scenes/EnemyZigzag.tscn" id="4"]
+[ext_resource type="PackedScene" path="res://scenes/EnemyShooter.tscn" id="5"]
+[ext_resource type="PackedScene" path="res://scenes/Bullet.tscn" id="6"]
+[ext_resource type="Script" path="res://scripts/HUD.gd" id="7"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1")
+player_scene = ExtResource("2")
+enemy_basic = ExtResource("3")
+enemy_zigzag = ExtResource("4")
+enemy_shooter = ExtResource("5")
+bullet_scene = ExtResource("6")
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.03, 0.03, 0.12, 1)
+z_index = -10
+
+[node name="PlayerContainer" type="Node2D" parent="."]
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("7")
+
+[node name="ScoreLabel" type="Label" parent="HUD"]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 250.0
+offset_bottom = 45.0
+text = "Score : 0"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 22
+
+[node name="HPLabel" type="Label" parent="HUD"]
+offset_left = 10.0
+offset_top = 40.0
+offset_right = 300.0
+offset_bottom = 70.0
+text = "❤ ❤ ❤ ❤ ❤"
+theme_override_colors/font_color = Color(1, 0.3, 0.3, 1)
+theme_override_font_sizes/font_size = 18
+
+[node name="WaveLabel" type="Label" parent="HUD"]
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -130.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 45.0
+text = "Vague 1"
+horizontal_alignment = 2
+theme_override_colors/font_color = Color(0.8, 0.8, 1, 1)
+theme_override_font_sizes/font_size = 22
+
+[node name="WaveBanner" type="Label" parent="HUD"]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_top = 0.4
+anchor_bottom = 0.4
+offset_left = -150.0
+offset_right = 150.0
+offset_top = -25.0
+offset_bottom = 25.0
+text = "— VAGUE 1 —"
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(1, 0.9, 0.2, 1)
+theme_override_font_sizes/font_size = 30
+visible = false
+
+[node name="GameOverScreen" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="Panel" type="Panel" parent="GameOverScreen"]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -120.0
+offset_right = 160.0
+offset_bottom = 120.0
+
+[node name="TitleLabel" type="Label" parent="GameOverScreen/Panel"]
+offset_left = 0.0
+offset_top = 15.0
+offset_right = 320.0
+offset_bottom = 55.0
+text = "GAME OVER"
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(1, 0.2, 0.2, 1)
+theme_override_font_sizes/font_size = 30
+
+[node name="ScoreLabel" type="Label" parent="GameOverScreen/Panel"]
+offset_left = 0.0
+offset_top = 70.0
+offset_right = 320.0
+offset_bottom = 105.0
+text = "Score final : 0"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 18
+
+[node name="WaveLabel" type="Label" parent="GameOverScreen/Panel"]
+offset_left = 0.0
+offset_top = 105.0
+offset_right = 320.0
+offset_bottom = 140.0
+text = "Vague atteinte : 1"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 16
+
+[node name="RestartButton" type="Button" parent="GameOverScreen/Panel"]
+offset_left = 80.0
+offset_top = 155.0
+offset_right = 240.0
+offset_bottom = 195.0
+text = "Recommencer"
+[connection signal="pressed" from="GameOverScreen/Panel/RestartButton" to="." method="_on_restart_pressed"]

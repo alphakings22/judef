@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://enemy_basic"]
+
+[ext_resource type="Script" path="res://scripts/Enemy.gd" id="1"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1"]
+radius = 16.0
+height = 28.0
+
+[node name="EnemyBasic" type="CharacterBody2D"]
+script = ExtResource("1")
+enemy_type = 0
+hp = 2
+speed = 120.0
+score_value = 100
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_1")
+
+[node name="Visual" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, 24, -18, -16, 0, -8, 18, -16)
+color = Color(1, 0.2, 0.2, 1)
+
+[node name="Eyes" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-8, -5, -4, -5, -4, 2, -8, 2)
+color = Color(1, 1, 0, 1)
+
+[node name="Eyes2" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(4, -5, 8, -5, 8, 2, 4, 2)
+color = Color(1, 1, 0, 1)
